@@ -39,8 +39,8 @@
                         (compute-edge-weight city-graph path-city new-city))))
     (list :length new-length :cities new-cities :weight new-weight)))
 
-(defun search-cities (city-graph path best-path)
-  (if (equal (path-length path) (path-length best-path))
+(defun search-cities (city-graph path)
+  (if (equal (path-length path) (path-length min-path))
     (let ((new-path (update-path city-graph path
                                  (car (last (path-cities path)))
                                  (first (path-cities path)))))
@@ -51,11 +51,16 @@
                                              (car (last (path-cities path)))
                                              city)))
                   (if (< (path-weight new-path) (path-weight best-path))
-                    (search-cities city-graph new-path best-path))))
-            (unvisited-cities (path-cities path) (path-cities best-path)))))
+                    (search-cities city-graph new-path))))
+            (unvisited-cities (path-cities path) (path-cities min-path)))))
+
+(defparameter best-path '())
+(defparameter min-path '())
 
 (defun travel-cities (city-graph source)
-  (search-cities city-graph
-                 (list :length 1 :cities (list source) :weight 0)
-                 (construct-hamiltonian city-graph)))
+  (progn
+    (setf best-path (construct-hamiltonian city-graph)
+          min-path best-path)
+    (search-cities city-graph
+                   (list :length 1 :cities (list source) :weight 0))))
 
