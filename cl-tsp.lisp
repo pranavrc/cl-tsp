@@ -1,4 +1,6 @@
 ;; A naive branch-and-bound algorithm for the Travelling Salesman problem.
+;; Pranav Ravichandran <me@onloop.net>
+;;
 ;;
 ;; > (load "cl-tsp.lisp")
 ;; > (defparameter city-graph '(:A (:B 7 :C 6 :D 10 :E 13)
