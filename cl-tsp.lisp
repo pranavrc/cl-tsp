@@ -1,3 +1,10 @@
+;; A naive branch-and-bound algorithm for the Travelling Salesman problem.
+;;
+;; > (load "cl-tsp.lisp")
+;; > (defparameter city-graph '(:A (:B 7 :C 6 :D 10 :E 13) :B (:A 7 :C 7 :D 10 :E 10) :C (:A 6 :B 7 :D 5 :E 9) :D (:A 10 :B 10 :C 5 :E 6) :E (:A 13 :B 10 :C 9 :D 6)))
+;; > (travel-cities city-graph :A)
+;; (:LENGTH 6 :CITIES (:A :B :E :D :C :A) :WEIGHT 34 :LENGTH 6 :CITIES (:A :C :D :E :B :A) :WEIGHT 34)
+
 (defun path-length (path)
   (getf path :length))
 
